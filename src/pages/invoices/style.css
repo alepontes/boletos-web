@@ -1,0 +1,61 @@
+.app {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.filters {
+    margin-bottom: 10px;
+}
+
+.filter-btn,
+.year-btn {
+    padding: 5px 10px;
+    margin-right: 5px;
+    background-color: #f0f0f0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+
+    appearance: none; /* Remove a seta em navegadores que suportam */
+    -webkit-appearance: none; /* Remove a seta no Chrome e Safari */
+    -moz-appearance: none; /* Remove a seta no Firefox */
+
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"%3E%3Cpath d="M7 10l5 5 5-5z" /%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posiciona o ícone no lado direito */
+    background-size: 16px;
+
+}
+
+.filter-btn.active,
+.year-btn.active {
+    background-color: #004d30;
+    color: white;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.data-table th {
+    background-color: #04401E;
+    color: white;
+}
+
+.icon-file {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-color: #ddd;
+    margin: auto;
+    border-radius: 2px;
+}
