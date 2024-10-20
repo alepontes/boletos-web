@@ -1,7 +1,6 @@
 import {Filters} from "../interfaces/Filters.ts";
 import axios from "axios";
 
-
 /**
  * Recupera os filtros
  */
