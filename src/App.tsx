@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import './App.css';
-import {getFaturas} from "./api/faturas.ts";
+import {getFaturas} from "./api/invoice.ts";
 import {getFilters} from "./api/filters.ts";
 import {Filters} from "./interfaces/Filters.ts";
 import {Invoice} from "./interfaces/Invoice.ts";
@@ -26,9 +26,9 @@ function App() {
                 getFilters(),
             ])
             .then((data: any) => {
-                const [faturas, filters] = data as any;
+                const [invoices, filters] = data as any;
 
-                setInvoices(faturas);
+                setInvoices(invoices);
                 setFilters(filters);
 
                 setSelectedYear(filters.years[0]);
@@ -39,12 +39,12 @@ function App() {
 
 
     const renderDataRows = () =>
-        invoices.map((item: any, index: any) => (
+        invoices.map((invoice: Invoice, index: any) => (
             <tr key={index}>
-                <td>{item.nomeUC}</td>
-                <td>{item.numeroUC}</td>
-                <td>{item.distribuidora}</td>
-                <td>{item.consumidor}</td>
+                <td>{invoice.personal.name}</td>
+                <td>{invoice.personal.clientId}</td>
+                <td>{invoice.general.distributor}</td>
+                <td>{invoice.personal.name}</td>
                 {Array.from({length: 12}).map((_, monthIndex) => (
                     <td key={monthIndex}>
                         <span className="icon-file"/> {/* Aqui você pode adicionar um ícone */}

@@ -1,1 +1,1 @@
-{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/api/faturas.ts","./src/api/filters.ts","./src/interfaces/Invoice.ts","./src/interfaces/Filters.ts"],"version":"5.6.3"}
+{"root":["./src/App.tsx","./src/main.tsx","./src/vite-env.d.ts","./src/api/filters.ts","./src/api/invoice.ts","./src/interfaces/Filters.ts","./src/interfaces/Invoice.ts"],"version":"5.6.3"}
