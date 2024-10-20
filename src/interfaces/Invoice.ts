@@ -27,6 +27,7 @@ interface Total {
 }
 
 export interface Invoice {
+    id?: string,
     personal: Personal;
     general: General;
     electricalEnergy: EnergyDetails;

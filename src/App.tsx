@@ -4,17 +4,46 @@ import {getFaturas} from "./api/invoice.ts";
 import {getFilters} from "./api/filters.ts";
 import {Filters} from "./interfaces/Filters.ts";
 import {Invoice} from "./interfaces/Invoice.ts";
+import {Search} from "./interfaces/Search.ts";
 
 function App() {
 
     const [invoices, setInvoices] = useState<Invoice[]>([]);
-    const [filters, setFilters] = useState<Filters>({});
+    const [filters, setFilters] = useState<Filters>();
     const [loading, setLoading] = useState<boolean>(true);
-    const [selectedYear, setSelectedYear] = useState(2024);
+    const [search, setSearch] = useState<Search>();
+
+    const handleSelectChangeConsumers = (event: any) => {
+        setSearch({
+            ...search,
+            clientId: event.target.value,
+        });
+    };
+
+    const handleSelectChangeDistributors = (event: any) => {
+        setSearch({
+            ...search,
+            distributor: event.target.value,
+        });
+    };
+
+    const handleSelectChangeYear = (year: any) => {
+
+        if (search?.year === year) {
+            return setSearch({
+                ...search,
+                year: undefined,
+            });
+        }
+
+        setSearch({
+            ...search,
+            year,
+        });
+    };
 
     // @ts-ignore @todo implementar
     const [error, setError] = useState<any>();
-
 
     useEffect(() => {
 
@@ -22,7 +51,7 @@ function App() {
 
         Promise
             .all([
-                getFaturas(),
+                getFaturas(search),
                 getFilters(),
             ])
             .then((data: any) => {
@@ -30,17 +59,16 @@ function App() {
 
                 setInvoices(invoices);
                 setFilters(filters);
-
-                setSelectedYear(filters.years[0]);
             })
             .catch(error => setError(error))
             .finally(() => setLoading(false));
-    }, []);
+
+    }, [search]);
 
 
     const renderDataRows = () =>
-        invoices.map((invoice: Invoice, index: any) => (
-            <tr key={index}>
+        invoices.map((invoice: Invoice) => (
+            <tr key={invoice.id}>
                 <td>{invoice.personal.name}</td>
                 <td>{invoice.personal.clientId}</td>
                 <td>{invoice.general.distributor}</td>
@@ -58,13 +86,30 @@ function App() {
             ?
             <div className="app">
                 <div className="filters">
-                    <button className="filter-btn">Consumidores</button>
-                    <button className="filter-btn active">Distribuidoras</button>
-                    {filters.years?.map((year: any) => (
+
+                    <select className="filter-btn" value={search?.clientId} onChange={handleSelectChangeConsumers}>
+                        <option value="">Consumidores</option>
+                        {
+                            filters?.consumers?.map(consumer => (
+                                <option value={consumer.id}>{consumer.name}</option>
+                            ))
+                        }
+                    </select>
+
+                    <select className="filter-btn" value={search?.distributor} onChange={handleSelectChangeDistributors}>
+                        <option value="">Distribuidoras</option>
+                        {
+                            filters?.distributors?.map((distributor: any) => (
+                                <option value={distributor}>{distributor}</option>
+                            ))
+                        }
+                    </select>
+
+                    {filters?.years?.map((year: any) => (
                         <button
                             key={year}
-                            className={`year-btn ${selectedYear === year ? "active" : ""}`}
-                            onClick={() => setSelectedYear(year)}
+                            className={`year-btn ${search?.year == year ? "active" : ""}`}
+                            onClick={() => handleSelectChangeYear(year)}
                         >
                             {year}
                         </button>

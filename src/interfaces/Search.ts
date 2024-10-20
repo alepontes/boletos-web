@@ -1,0 +1,1 @@
+export type Search = Partial<{ clientId: string, distributor: string, year: string }>

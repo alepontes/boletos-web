@@ -15,6 +15,16 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+
+    appearance: none; /* Remove a seta em navegadores que suportam */
+    -webkit-appearance: none; /* Remove a seta no Chrome e Safari */
+    -moz-appearance: none; /* Remove a seta no Firefox */
+
+    background-image: url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="gray"%3E%3Cpath d="M7 10l5 5 5-5z" /%3E%3C/svg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px center; /* Posiciona o ícone no lado direito */
+    background-size: 16px;
+
 }
 
 .filter-btn.active,
